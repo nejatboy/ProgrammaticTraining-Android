@@ -78,17 +78,17 @@ class MovieRow(context: Context) : BaseLayout(context) {
 
 
     init {
-        layoutParams = RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT).also {
-            it.setMargins(40)
-        }
+        val lp = RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT)
+        lp.setMargins(40)
 
+        val drawable = GradientDrawable()
+        drawable.cornerRadius = 20f
+        drawable.setColor(Color.WHITE)
+        drawable.setStroke(2, Color.LTGRAY)
+
+        layoutParams = lp
+        background = drawable
         elevation = 20f
-
-        background = GradientDrawable().also {
-            it.cornerRadius = 20f
-            it.setColor(Color.WHITE)
-            it.setStroke(2, Color.GRAY)
-        }
 
         setupViews()
         addViews()
