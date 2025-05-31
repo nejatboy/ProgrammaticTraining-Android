@@ -2,7 +2,8 @@ package com.example.programmatictraining.ui
 
 import android.os.Bundle
 import com.example.programmatictraining.base.BaseActivity
-import com.example.programmatictraining.ui.spash.SplashFragment
+import com.example.programmatictraining.ui.movie.MovieFragment
+
 
 
 class MainActivity : BaseActivity<MainLayout>() {
@@ -16,15 +17,10 @@ class MainActivity : BaseActivity<MainLayout>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setupSplash()
-    }
-
-
-    private fun setupSplash() {
-        val splashFragment = SplashFragment()
+        val movieFragment = MovieFragment()
 
         supportFragmentManager.beginTransaction()
-            .add(layout.container.id, splashFragment)
+            .add(layout.container.id, movieFragment)
             .commit()
     }
 }
