@@ -19,12 +19,12 @@ class SplashLayout(context: Context) : BaseLayout(context) {
         textView.typeface = Typeface.DEFAULT_BOLD
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
 
-        addView(textView)
+        addViews(textView)
 
-        set.clone(this)
-        set.connect(textView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 20.dp)
-        set.connect(textView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 20.dp)
-        set.centerVertically(textView.id, ConstraintSet.PARENT_ID)
-        set.applyTo(this)
+        applyConstraints {
+            connect(textView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 20.dp)
+            connect(textView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 20.dp)
+            centerVertically(textView.id, ConstraintSet.PARENT_ID)
+        }
     }
 }

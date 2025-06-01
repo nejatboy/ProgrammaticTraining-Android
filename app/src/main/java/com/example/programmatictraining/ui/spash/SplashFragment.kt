@@ -15,13 +15,11 @@ class SplashFragment: BaseFragment<SplashLayout, Nothing>() {
 
 
     override fun onViewCreate(layout: SplashLayout) {
-        layout.setBackgroundColor(Color.MAGENTA)
-
-        setupSplashText()
+        layout.textView.setText(R.string.app_name)
     }
 
 
     private fun setupSplashText() {
-        layout.textView.setText(R.string.app_name)
+
     }
 }
