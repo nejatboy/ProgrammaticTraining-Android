@@ -7,9 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 
+interface BaseFragmentContract {
+    fun onBackPressed()
+}
+
+
 
 @Suppress("UNCHECKED_CAST")
-abstract class BaseFragment<L: BaseLayout, P: Fragment>: Fragment() {
+abstract class BaseFragment<L: BaseLayout, P: BaseFragmentContract>: Fragment(), BaseFragmentContract {
 
     protected val layout: L get() = view as L
     protected val parent: P? get() = parentFragment as? P
@@ -21,8 +26,8 @@ abstract class BaseFragment<L: BaseLayout, P: Fragment>: Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        onViewCreate(view as L)
         super.onViewCreated(view, savedInstanceState)
+        onViewCreate(view as L)
     }
 
 
@@ -30,4 +35,17 @@ abstract class BaseFragment<L: BaseLayout, P: Fragment>: Fragment() {
 
 
     abstract fun onViewCreate(layout: L)
+
+
+    override fun onBackPressed() {
+        if (childFragmentManager.popBackStackImmediate()) {
+            return
+        }
+
+        if (parentFragmentManager.popBackStackImmediate()) {
+            return
+        }
+
+        activity?.finish()
+    }
 }

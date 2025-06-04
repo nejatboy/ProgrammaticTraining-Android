@@ -1,9 +1,11 @@
 package com.example.programmatictraining.ui.spash
 
-import android.graphics.Color
-import com.example.programmatictraining.R
 import com.example.programmatictraining.base.BaseFragment
-
+import com.example.programmatictraining.ui.MainActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class SplashFragment: BaseFragment<SplashLayout, Nothing>() {
@@ -15,11 +17,11 @@ class SplashFragment: BaseFragment<SplashLayout, Nothing>() {
 
 
     override fun onViewCreate(layout: SplashLayout) {
-        layout.textView.setText(R.string.app_name)
-    }
+        layout.textView.text = "Splash"
 
-
-    private fun setupSplashText() {
-
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(2000)
+            (activity as? MainActivity)?.navigateLogin()
+        }
     }
 }
