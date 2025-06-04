@@ -2,6 +2,7 @@ package com.example.programmatictraining.base
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Color
 import android.util.TypedValue
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +19,17 @@ abstract class BaseLayout(context: Context): ConstraintLayout(context) {
     }
 
 
+    init {
+        configure()
+    }
+
+
+    private fun configure() {
+        setBackgroundColor(Color.WHITE)
+        isClickable = true
+    }
+
+
     protected fun applyConstraints(block: ConstraintSet.() -> Unit) {
         set.clone(this)
         set.block()
@@ -25,7 +37,9 @@ abstract class BaseLayout(context: Context): ConstraintLayout(context) {
     }
 
 
-    protected fun addViews(vararg views: View) = views.forEach { view ->
-        addView(view)
+    protected fun addViews(vararg views: View) {
+        views.forEach { view ->
+            addView(view)
+        }
     }
 }

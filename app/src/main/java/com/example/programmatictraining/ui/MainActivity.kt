@@ -5,7 +5,6 @@ import com.example.programmatictraining.base.BaseActivity
 import com.example.programmatictraining.ui.movie.MovieFragment
 
 
-
 class MainActivity : BaseActivity<MainLayout>() {
 
 

@@ -121,22 +121,20 @@ class MovieRow(context: Context) : BaseLayout(context) {
 
 
     private fun setupConstraints() {
-        set.clone(this)
+        applyConstraints {
+            connect(textViewName.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 10)
+            centerHorizontally(textViewName.id, ConstraintSet.PARENT_ID)
 
-        set.connect(textViewName.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 10)
-        set.centerHorizontally(textViewName.id, ConstraintSet.PARENT_ID)
+            connect(imageView.id, ConstraintSet.TOP, textViewName.id, ConstraintSet.BOTTOM, 20)
+            centerHorizontally(imageView.id, ConstraintSet.PARENT_ID)
+            setDimensionRatio(imageView.id, "16:9")
+            constrainPercentWidth(imageView.id, 0.9f)
 
-        set.connect(imageView.id, ConstraintSet.TOP, textViewName.id, ConstraintSet.BOTTOM, 20)
-        set.centerHorizontally(imageView.id, ConstraintSet.PARENT_ID)
-        set.setDimensionRatio(imageView.id, "16:9")
-        set.constrainPercentWidth(imageView.id, 0.9f)
-
-        set.connect(textViewDescription.id, ConstraintSet.TOP, imageView.id, ConstraintSet.BOTTOM)
-        set.connect(textViewDescription.id, ConstraintSet.START, imageView.id, ConstraintSet.START)
-        set.connect(textViewDescription.id, ConstraintSet.END, imageView.id, ConstraintSet.END)
-        set.connect(textViewDescription.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 10)
-
-        set.applyTo(this)
+            connect(textViewDescription.id, ConstraintSet.TOP, imageView.id, ConstraintSet.BOTTOM)
+            connect(textViewDescription.id, ConstraintSet.START, imageView.id, ConstraintSet.START)
+            connect(textViewDescription.id, ConstraintSet.END, imageView.id, ConstraintSet.END)
+            connect(textViewDescription.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 10)
+        }
     }
 
 
