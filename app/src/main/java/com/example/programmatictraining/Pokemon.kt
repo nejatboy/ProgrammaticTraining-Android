@@ -3,8 +3,7 @@ package com.example.programmatictraining
 import androidx.annotation.DrawableRes
 
 
-data class Movie(
+data class Pokemon(
     val name: String,
-    @DrawableRes val imageId: Int,
-    val description: String
+    @DrawableRes val imageId: Int
 )
