@@ -1,19 +1,35 @@
-package com.example.programmatictraining.ui.movie
+package com.example.programmatictraining
+
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 
-import com.example.programmatictraining.R
-import com.example.programmatictraining.base.BaseFragment
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: MovieRecyclerView
 
 
-class MovieFragment: BaseFragment<MovieLayout, Nothing>() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+        recyclerView = MovieRecyclerView(context = this)
+        setContentView(recyclerView)
+        enableEdgeToEdge()
 
-    override fun prepareLayout(): MovieLayout {
-        return MovieLayout(context = requireContext())
+        ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        setData()
     }
 
 
-    override fun onViewCreate(layout: MovieLayout) {
+    private fun setData() {
         val movies = arrayListOf(
             Movie(name = "Gladyator", imageId = R.drawable.gladyator, description = "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery."),
             Movie(name = "Inception", imageId = R.drawable.inception, description = "Cobb steals information from his targets by entering their dreams."),
@@ -23,6 +39,6 @@ class MovieFragment: BaseFragment<MovieLayout, Nothing>() {
             Movie(name = "Shooter", imageId = R.drawable.shooter, description = "Bob Lee Swagger, one of the world's greatest marksman, lives alone in the Rockies."),
         )
 
-        layout.recyclerView.movieAdapter?.movies = movies
+        recyclerView.movieAdapter?.movies = movies
     }
 }

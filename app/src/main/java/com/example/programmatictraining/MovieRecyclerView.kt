@@ -1,4 +1,4 @@
-package com.example.programmatictraining.ui.movie
+package com.example.programmatictraining
 
 import android.content.Context
 import android.graphics.Color
@@ -16,7 +16,6 @@ import androidx.core.view.setMargins
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.programmatictraining.base.BaseLayout
 
 
 class MovieRecyclerView(context: Context): RecyclerView(context) {
@@ -27,7 +26,6 @@ class MovieRecyclerView(context: Context): RecyclerView(context) {
     init {
         adapter = MovieAdapter()
         setBackgroundColor(Color.WHITE)
-        layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT)
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         setPadding(20)
     }
@@ -70,8 +68,9 @@ class MovieHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
 
-class MovieRow(context: Context) : BaseLayout(context) {
+class MovieRow(context: Context) : ConstraintLayout(context) {
 
+    private val set = ConstraintSet()
     private val textViewName = TextView(context)
     private val imageView = ImageView(context)
     private val textViewDescription = TextView(context)
@@ -99,7 +98,7 @@ class MovieRow(context: Context) : BaseLayout(context) {
     private fun setupViews() {
         textViewName.id = generateViewId()
         textViewName.typeface = Typeface.DEFAULT_BOLD
-        textViewName.setTextSize(TypedValue.COMPLEX_UNIT_PX, 50f)
+        textViewName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
         textViewName.setTextColor(Color.BLACK)
 
         imageView.id = generateViewId()
@@ -107,7 +106,7 @@ class MovieRow(context: Context) : BaseLayout(context) {
 
         textViewDescription.id = generateViewId()
         textViewDescription.layoutParams = LayoutParams(LayoutParams.MATCH_CONSTRAINT, LayoutParams.WRAP_CONTENT)
-        textViewDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40f)
+        textViewDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
         textViewDescription.setTextColor(Color.GRAY)
         textViewDescription.gravity = Gravity.CENTER
     }
@@ -121,20 +120,22 @@ class MovieRow(context: Context) : BaseLayout(context) {
 
 
     private fun setupConstraints() {
-        applyConstraints {
-            connect(textViewName.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 10)
-            centerHorizontally(textViewName.id, ConstraintSet.PARENT_ID)
+        set.clone(this)
 
-            connect(imageView.id, ConstraintSet.TOP, textViewName.id, ConstraintSet.BOTTOM, 20)
-            centerHorizontally(imageView.id, ConstraintSet.PARENT_ID)
-            setDimensionRatio(imageView.id, "16:9")
-            constrainPercentWidth(imageView.id, 0.9f)
+        set.connect(textViewName.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 10)
+        set.centerHorizontally(textViewName.id, ConstraintSet.PARENT_ID)
 
-            connect(textViewDescription.id, ConstraintSet.TOP, imageView.id, ConstraintSet.BOTTOM)
-            connect(textViewDescription.id, ConstraintSet.START, imageView.id, ConstraintSet.START)
-            connect(textViewDescription.id, ConstraintSet.END, imageView.id, ConstraintSet.END)
-            connect(textViewDescription.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 10)
-        }
+        set.connect(imageView.id, ConstraintSet.TOP, textViewName.id, ConstraintSet.BOTTOM, 20)
+        set.centerHorizontally(imageView.id, ConstraintSet.PARENT_ID)
+        set.setDimensionRatio(imageView.id, "16:9")
+        set.constrainPercentWidth(imageView.id, 0.9f)
+
+        set.connect(textViewDescription.id, ConstraintSet.TOP, imageView.id, ConstraintSet.BOTTOM)
+        set.connect(textViewDescription.id, ConstraintSet.START, imageView.id, ConstraintSet.START)
+        set.connect(textViewDescription.id, ConstraintSet.END, imageView.id, ConstraintSet.END)
+        set.connect(textViewDescription.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 10)
+
+        set.applyTo(this)
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.programmatictraining.ui.movie
+package com.example.programmatictraining
 
 import androidx.annotation.DrawableRes
 
