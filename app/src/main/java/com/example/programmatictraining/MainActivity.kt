@@ -9,17 +9,17 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: MovieRecyclerView
+    private lateinit var layout: MainLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        recyclerView = MovieRecyclerView(context = this)
-        setContentView(recyclerView)
+        layout = MainLayout(context = this)
+        setContentView(layout)
         enableEdgeToEdge()
 
-        ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(layout) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -39,6 +39,6 @@ class MainActivity : AppCompatActivity() {
             Movie(name = "Shooter", imageId = R.drawable.shooter, description = "Bob Lee Swagger, one of the world's greatest marksman, lives alone in the Rockies."),
         )
 
-        recyclerView.movieAdapter?.movies = movies
+        layout.recyclerView.movieAdapter?.movies = movies
     }
 }

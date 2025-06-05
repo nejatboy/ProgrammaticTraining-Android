@@ -8,6 +8,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -25,8 +26,8 @@ class MovieRecyclerView(context: Context): RecyclerView(context) {
 
     init {
         adapter = MovieAdapter()
-        setBackgroundColor(Color.WHITE)
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         setPadding(20)
     }
 }
