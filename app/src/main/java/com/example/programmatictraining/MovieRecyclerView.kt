@@ -39,7 +39,7 @@ class MovieAdapter: RecyclerView.Adapter<MovieHolder>() {
     var movies = ArrayList<Movie>()
         set(value) {
             field = value
-            notifyItemMoved(0, value.size - 1)
+            notifyItemRangeChanged(0, value.size)
         }
 
 
