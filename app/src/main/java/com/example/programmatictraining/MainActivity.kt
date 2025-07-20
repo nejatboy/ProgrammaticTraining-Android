@@ -15,9 +15,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        enableEdgeToEdge()
+
         layout = MainLayout(context = this)
         setContentView(layout)
-        enableEdgeToEdge()
 
         ViewCompat.setOnApplyWindowInsetsListener(layout) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -39,6 +40,6 @@ class MainActivity : AppCompatActivity() {
             Movie(name = "Shooter", imageId = R.drawable.shooter, description = "Bob Lee Swagger, one of the world's greatest marksman, lives alone in the Rockies."),
         )
 
-        layout.recyclerView.movieAdapter?.movies = movies
+        layout.recyclerView.adapter?.movies = movies
     }
 }

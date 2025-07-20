@@ -21,14 +21,17 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MovieRecyclerView(context: Context): RecyclerView(context) {
 
-    val movieAdapter: MovieAdapter? get() = adapter as? MovieAdapter
-
 
     init {
         adapter = MovieAdapter()
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         setPadding(20)
+    }
+
+
+    override fun getAdapter(): MovieAdapter? {
+        return super.getAdapter() as? MovieAdapter
     }
 }
 
@@ -39,7 +42,7 @@ class MovieAdapter: RecyclerView.Adapter<MovieHolder>() {
     var movies = ArrayList<Movie>()
         set(value) {
             field = value
-            notifyItemMoved(0, value.size - 1)
+            notifyItemRangeChanged(0, field.size)
         }
 
 
